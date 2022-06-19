@@ -37,7 +37,7 @@ begin
 	number = 8'b00000000; sel = 2'b01; #10;//0 
 	number = 8'b00000000; sel = 2'b01; #10;//0
 	number = 8'b11001000; sel = 2'b00; #10;//200
-	number = 8'b00000000; sel = 2'b11; #10;//30 
+	number = 8'b00000000; sel = 2'b11; #10;//10 
 
 	sel_type = 3'b100;
 	number = 8'b00010100; sel = 2'b00; #10;//20
