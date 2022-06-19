@@ -93,8 +93,9 @@ output [7:0] charge;   // how much charge
 
 reg if_sell;
 reg [2:0] out_type;
-reg[7:0] charge;
-reg[7:0] need = 8'b0; // mow much you need to pay
+reg [7:0] charge;
+reg [7:0] need = 8'b0; // mow much you need to pay
+reg [7:0] pre_out_number;
 
 
 always@(sel_type)begin
@@ -115,10 +116,16 @@ end
 
 always@( posedge clk or out_number )begin
    
-    if(sel_in == 2'b01)begin
+    if(sel_in == 2'b01 )begin
         if_sell = 0;
         out_type= 3'b0;
         charge = out_number;
+    end
+    else if(sel_in == 2'b10 )begin
+	if_sell = 0;
+        out_type= 3'b0;
+        charge = pre_out_number-out_number;
+	pre_out_number<=out_number;
     end
     else if(sel_in==2'b11) begin
         if(out_number >= need)begin
@@ -136,6 +143,7 @@ always@( posedge clk or out_number )begin
 	if_sell = 0;
         out_type= 3'b0;
         charge = 8'b0 ;
+	pre_out_number<=out_number;
     end
     
 end
